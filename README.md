@@ -35,6 +35,7 @@ $configurator->addParameters($parametersLoader->getParameters());
 
 Then, in your `config.neon` you can use any variable you configured in `.env` file.
 Or use ENV variables inside your Docker container, or CI build, you have the idea...
+Please see [vlucas/phpdotenv  documentation](https://github.com/vlucas/phpdotenv) for `.env` file syntax.
 
 ```neon
 parameters:
