@@ -4,7 +4,10 @@
     "description": "dotenv integration into Nette framework",
     "keywords": [
         "wodCZ",
-        "nette-dotenv"
+        "nette-dotenv",
+        "nette",
+        "env",
+        ".env"
     ],
     "homepage": "https://github.com/wodCZ/nette-dotenv",
     "license": "MIT",
