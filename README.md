@@ -19,7 +19,7 @@ To make values compatible with Nette, it replaces `%` with `%%`.
 Via Composer
 
 ``` bash
-$ composer require wodCZ/nette-dotenv
+$ composer require wodcz/nette-dotenv
 ```
 
 ## Usage

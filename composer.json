@@ -1,5 +1,5 @@
 {
-    "name": "wodCZ/nette-dotenv",
+    "name": "wodcz/nette-dotenv",
     "type": "library",
     "description": "dotenv integration into Nette framework",
     "keywords": [
