@@ -28,7 +28,7 @@ $ composer require wodcz/nette-dotenv
 // in app/bootstrap.php file (or wherever you create \Nette\Configurator)
 // add these lines
 
-$parametersLoader = new \wodCZ\NetteDotenv\ParametersLoader(__DIR__.'/../'))
+$parametersLoader = new \wodCZ\NetteDotenv\ParametersLoader(__DIR__.'/../');
 $configurator->addParameters($parametersLoader->getParameters());
 
 ```
