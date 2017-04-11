@@ -31,9 +31,11 @@ class EnvAccessor
             if ($this->localOnly) {
                 trigger_error('localOnly option is only available in PHP 7');
             }
-            return getenv($key) ?: $default;
+            $value = getenv($key);
+            return $value === false ? $default : $value;
         }
-        return getenv($key, $this->localOnly) ?: $default;
+        $value = getenv($key, $this->localOnly);
+        return $value === false ? $default : $value;
     }
 
     private function load()

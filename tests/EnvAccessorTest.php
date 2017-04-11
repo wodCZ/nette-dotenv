@@ -39,9 +39,37 @@ class EnvAccessorTest extends \PHPUnit_Framework_TestCase
         $ts = new EnvAccessor(__DIR__);
         $this->assertEquals('some%20string%20', $ts->get('percent'));
     }
-    public function testReturnsDefaultOnNonExistent()
+
+    public function testReturnsDefaultForNonExistentWithDefault()
     {
         $ts = new EnvAccessor(__DIR__);
         $this->assertEquals('default', $ts->get('some_non_existing_key', 'default'));
+    }
+
+    public function testReturnsNullForNonExistentWithoutDefault()
+    {
+        $ts = new EnvAccessor(__DIR__);
+        $this->assertNull($ts->get('some_non_existing_key'));
+    }
+
+    public function testReturnsEmptyStringForEmpty()
+    {
+        $ts = new EnvAccessor(__DIR__);
+        $this->assertNotNull($ts->get('empty'));
+        $this->assertSame('', $ts->get('empty'));
+    }
+
+    public function testReturnsZeroStringForZero()
+    {
+        $ts = new EnvAccessor(__DIR__);
+        $this->assertNotNull($ts->get('zero'));
+        $this->assertSame('0', $ts->get('zero'));
+    }
+
+    public function testReturnsFalseStringForFalse()
+    {
+        $ts = new EnvAccessor(__DIR__);
+        $this->assertNotNull($ts->get('false'));
+        $this->assertSame('false', $ts->get('false'));
     }
 }
