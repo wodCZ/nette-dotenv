@@ -95,7 +95,8 @@ If you discover any security related issues, please email admin@ikw.cz instead o
 
 ## Credits
 
-- [Martin Janecek][link-author]
+- [Martin Janeček][link-author]
+- [Vašek Henzl](https://github.com/vhenzl)
 - [All Contributors][link-contributors]
 
 ## License
