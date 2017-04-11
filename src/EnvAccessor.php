@@ -15,7 +15,7 @@ class EnvAccessor
     /** @var bool */
     private $localOnly;
 
-    public function __construct($directory, $fileName = '.env', $overload = false, $localOnly = true)
+    public function __construct($directory, $fileName = '.env', $overload = false, $localOnly = false)
     {
         $this->directory = $directory;
         $this->fileName = $fileName;
@@ -27,6 +27,12 @@ class EnvAccessor
     {
         $this->load();
 
+        if (PHP_MAJOR_VERSION === 5) {
+            if ($this->localOnly) {
+                trigger_error('localOnly option is only available in PHP 7');
+            }
+            return getenv($key) ?: $default;
+        }
         return getenv($key, $this->localOnly) ?: $default;
     }
 

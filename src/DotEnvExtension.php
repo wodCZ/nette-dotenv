@@ -10,7 +10,7 @@ class DotEnvExtension extends CompilerExtension
         'directory' => '%appDir%/../',
         'fileName' => '.env',
         'overload' => false,
-        'localOnly' => true,
+        'localOnly' => false,
         'prefix' => false,
         'class' => '\wodCZ\NetteDotenv\EnvAccessor'
     );

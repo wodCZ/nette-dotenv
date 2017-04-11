@@ -29,7 +29,7 @@ class EnvAccessorTest extends \PHPUnit_Framework_TestCase
     public function testOverridesWhenConfigured()
     {
         $_ENV['something'] = 'existingEnvVariable';
-        $ts = new EnvAccessor(__DIR__, '.env', 'ENV', true);
+        $ts = new EnvAccessor(__DIR__, '.env', true);
         $ts->get('just_trigger_load');
         $this->assertEquals('something', $_ENV['something']);
     }

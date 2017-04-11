@@ -61,7 +61,7 @@ env:
 	directory: "%appDir%/../"
 	fileName: ".env"
 	overload: false
-	localOnly: true
+	localOnly: false
 	prefix: false
 	class: "\wodCZ\NetteDotenv\EnvAccessor"
 ```
@@ -71,7 +71,7 @@ env:
 | `directory` | Where your `.env` file is located |
 | `fileName` | Name of your `.env` file |
 | `overload` | Whether options in the `.env` file should override existing environment variables |
-| `localOnly` | [If true, only returns local environment variables (set by the operating system or putenv).](http://php.net/getenv#refsect1-function.getenv-parameters) |
+| `localOnly` | [Set to true to only return local environment variables (set by the operating system or putenv).](http://php.net/getenv#refsect1-function.getenv-parameters) |
 | `prefix` | Whether to prefix the service name with the extension name |
 | `class` | Class used to access environment variables |
 
