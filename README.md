@@ -7,63 +7,73 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This little utility helps you to work with environment variables in config.neon.
-
-Also, this parses the `.env` file - a feature known for Laravel users.
-
-To be specific, it returns the `$_SERVER` variable (after populating it with .env variables).
-To make values compatible with Nette, it replaces `%` with `%%`.
+This little extension helps you to work with environment variables in config.neon.
+To make it even more convenient, this extension also variables from `.env` file - a feature well known to Laravel users.
 
 ## Install
 
 Via Composer
 
-``` bash
+```bash
 $ composer require wodcz/nette-dotenv
+```
+
+Then register extension in your `config.neon`
+```neon
+extensions:
+	env: wodCZ\NetteDotenv\DotEnvExtension
 ```
 
 ## Usage
 
-```php
-// in app/bootstrap.php file (or wherever you create \Nette\Configurator)
-// add these lines
-
-$parametersLoader = new \wodCZ\NetteDotenv\ParametersLoader(__DIR__.'/../');
-$configurator->addParameters($parametersLoader->getParameters());
-
-```
-
-Then, in your `config.neon` you can use any variable you configured in `.env` file.
-Or use ENV variables inside your Docker container, or CI build, you have the idea...
-Please see [vlucas/phpdotenv  documentation](https://github.com/vlucas/phpdotenv) for `.env` file syntax.
+You can access any environment variable using `@env.get('key', 'default')` syntax:
 
 ```neon
-parameters:
-    someVariable: %ENV.DB_HOST%
-
-database:
-    default:
-        dsn: "mysql:host=%ENV.DB_HOST%;dbname=%ENV.DB_NAME%"
-        user: %ENV.DB_USER%
-        password: %ENV.DB_PASSWORD%
+services:
+    - App/MyConnection(@env::get('DB_HOST', '127.0.0.1'))
 ```
 
-Available `ParametersLoader` variables:
-```php
-new ParametersLoader(
-    $directory, // Where your .env file is stored
-    $fileName = '.env', // You may choose file name other than `.env` 
-    $namespace = 'ENV', // Key, under which will be ENV variables saved to Nette parameters
-    $overload = false // Controls whether .env file variables should override existing ENV variables
-)
+Environment variables are often set by a `docker`, `docker-compose`, or your CI server.
+To make working with environment variables even easier, you can specify them in `.env` file
+in root directory of your application. 
+
+This file should be hidden from VCS using `.gitignore` or so,
+because each developer/server could require different environment configuration. 
+Furthermore, having `.env` file with credentials in repository would be a security risk.
+
+This is an example on how your `.env` file might look like:
+
+```
+DB_HOST=192.168.0.10
+DB_USER=myprojuser
+DB_NAME=myproj
+GOOGLE_API_KEY=my_own_key_used_for_development
 ```
 
-If you change `$namespace` parameter, for example to `ENVIRONMENT`, then in `config.neon`:
+Have a look at [vlucas/phpdotenv documentation](https://github.com/vlucas/phpdotenv) for more comprehensive examples.
 
+## Configuration
+
+You can change behavior of this extension using `neon` configuration. Here is a list of available options with their
+default values.
 ```neon
-parameters:
-	someVariable: %ENVIRONMENT.DB_HOST%
+env:
+	directory: "%appDir%/../"
+	fileName: ".env"
+	overload: false
+	localOnly: true
+	prefix: false
+	class: "\wodCZ\NetteDotenv\EnvAccessor"
 ```
+
+| Option | Description |
+|--------|-------------|
+| `directory` | Where your `.env` file is located |
+| `fileName` | Name of your `.env` file |
+| `overload` | Whether options in the `.env` file should override existing environment variables |
+| `localOnly` | [If true, only returns local environment variables (set by the operating system or putenv).](http://php.net/getenv#refsect1-function.getenv-parameters) |
+| `prefix` | Whether to prefix the service name with the extension name |
+| `class` | Class used to access environment variables |
 
 ## Change log
 
