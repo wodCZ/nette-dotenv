@@ -63,7 +63,7 @@ env:
 	overload: false
 	localOnly: false
 	prefix: false
-	class: "\wodCZ\NetteDotenv\EnvAccessor"
+	class: \wodCZ\NetteDotenv\EnvAccessor
 ```
 
 | Option | Description |
